@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Feature\EnumController;
 
 
 /*
@@ -16,18 +17,16 @@ use App\Http\Controllers\Auth\AuthController;
 |
 */
 
-Route::get('/hello44', function(){
-    return 'Hello World323';
-});
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 //Middleware
 Route::group(['middleware'=>['auth:sanctum']], function(){
+//Logout
 Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/hello', function(Request $request){
-    return 'Hello World';
-});
+//Enum
+Route::get('/enums', [EnumController::class, 'index']);
+
 });
 
