@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Feature\EnumController;
 use App\Http\Controllers\Auth\RoleController;
+use App\Http\Controllers\Event\EventController;
 
 
 /*
@@ -39,6 +40,17 @@ Route::prefix('role')->name('.role')->group(function(){
     Route::delete('/{id}', [RoleController::class, 'destroy'])->name('.destroy');
 });
 
+//Event Management
+Route::prefix('event')->name('.event')->group(function(){
+    Route::get('/', [EventController::class, 'myevent'])->name('.myevent');
+    Route::post('/', [EventController::class, 'store'])->name('.store');
+    Route::get('/{id}', [EventController::class, 'show'])->name('.show');
+    Route::put('/{id}', [EventController::class, 'update'])->name('.update');
+    Route::delete('/{id}', [EventController::class, 'destroy'])->name('.destroy');
+});
+
+//Event
+Route::get('/events', [EventController::class, 'events'])->name('.events');
 
 
 

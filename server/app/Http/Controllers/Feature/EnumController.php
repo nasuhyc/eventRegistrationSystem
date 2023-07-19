@@ -15,7 +15,6 @@ class EnumController extends Controller
     public function index(Request $request)
     {
         $enums = [
-            EventStatus::class,
             EventType::class,
         ];
 
