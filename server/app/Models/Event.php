@@ -24,5 +24,10 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class, 'organizers');
     }
+
+    public function participants()
+    {
+        return $this->belongsToMany(User::class, 'participants');
+    }
 }
 

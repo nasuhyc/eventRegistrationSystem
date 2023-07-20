@@ -57,6 +57,12 @@ class RoleService{
         return $role;
     }
 
+    public function allRoles(){
+        //Roles except admin are brought.
+        $roles=Role::where('id','!=',1)->get();
+        return $roles;
+    }
+
 
 }
 
