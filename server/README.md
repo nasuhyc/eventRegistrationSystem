@@ -1,66 +1,186 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Event Registration System
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## In this project, a fundamental event planning system has been implemented.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Events are created based on roles.
+- The system has the authority to create events based on roles. In other words, only organizers and admins can create new events.
+- The project provides authentication and authorization processes.
+- Laravel's authorization system has been used for this authorization process.
+- Resource API and Resource Collection structures have been utilized.
+- The Service Layer has been utilized.
+- Enum structures are useful data types for representing specific constant values.
 
-## Learning Laravel
+#### - The process of creating enums has been developed using the composer and artisan command.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### - The command for creating an enum is as follows:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    php artisan make:enum EnumName
+  
+#### - It is located in the Other/Enums folder.
+  
+#### - The created enums should be defined within the "EnumController".
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+ 
 
-## Laravel Sponsors
+## Run it on your computer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Clone the project
 
-### Premium Partners
+```bash
+git clone https://github.com/nasuhyc/eventRegistrationSystem.git
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Install required packages
 
-## Contributing
+```bash
+  composer update
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Important
 
-## Code of Conduct
+```
+** Please edit your env information(.env)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=database_name
+DB_USERNAME=database_user
+DB_PASSWORD=database_password
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
 
-## License
+Run the server
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+  php artisan serve
+```
+
+
+
+
+## REST API Usage
+
+#### AuthController routes for register, login and logout
+
+
+#### Register
+```http
+  POST  /api/register
+```
+
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+| `name` | `string` | Nasuh |
+| `email` | `string` | nasuhyc@gmail.com |
+| `password` | `string` | 123123 |
+| `password_confirmation` | `string` | 123123 |
+| `role_id` | `int` | 1 | "1"=>Admin , "2"=> Organizer , "2"=> User
+
+#### Login
+
+```http
+  POST  /api/login
+```
+
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+| `email` | `string` | nasuhyc@gmail.com |
+| `password` | `string` | 123123 |
+
+
+#### Logout
+
+```http
+  POST  /api/logout
+```
+
+
+## Role
+
+```http
+  - POST /api/role/
+  - GET /api/role/
+  - GET /api/role/{id}
+  - PUT /api/role/{id}
+  - DELETE /api/role/{id}
+
+```
+#### Others
+```http
+  - GET /api/roles/
+```
+
+#### BODY raw
+
+```http
+ {
+    "name":"role_name"
+ }
+```
+
+
+## Event
+
+```http
+  - POST /api/event/
+  - GET /api/event/
+  - GET /api/event/{id}
+  - PUT /api/event/{id}
+  - DELETE /api/event/{id}
+```
+
+#### Others
+```http
+  - GET /api/events
+```
+
+
+
+#### BODY raw
+
+```http
+  
+{
+    "title":"event_title",
+    "description":"event_description",
+    "speaker":"event_speaker",
+    "event_date":"2023-07-18T16:18:56.000000Z",
+    "location":"event_location",
+    "event_type":"event_type"
+}
+  
+```
+
+## Participant
+
+```http
+  - POST /api/participant/
+  - GET /api/participant/
+```
+#### BODY raw (Create)
+
+```http
+Create
+{
+    "event_id":3
+}
+
+```
+
+#### BODY raw (Update)
+
+```http
+{
+    "event_id":3,
+    "status":-1,
+    "comment":"comment_text"
+}
+
+```
+
+  
