@@ -46,6 +46,11 @@ class RoleController extends Controller
         return new RoleResource($role);
     }
 
+    public function allRoles(){
+        $roles = $this->roleService->allRoles();
+        return new RoleCollection($roles);
+    }
+
 
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Feature\EnumController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\Event\EventController;
+use App\Http\Controllers\Event\ParticipantController;
 
 
 /*
@@ -19,6 +20,9 @@ use App\Http\Controllers\Event\EventController;
 |
 */
 
+
+//User chooses role when registering
+Route::get('/roles', [RoleController::class, 'allRoles']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -49,8 +53,15 @@ Route::prefix('event')->name('.event')->group(function(){
     Route::delete('/{id}', [EventController::class, 'destroy'])->name('.destroy');
 });
 
-//Event
+//Events
 Route::get('/events', [EventController::class, 'events'])->name('.events');
+
+
+//Participant
+Route::prefix('participant')->name('.participant')->group(function(){
+    Route::post('/', [ParticipantController::class, 'storeOrUpdate'])->name('.storeOrUpdate');
+    Route::get('/', [ParticipantController::class, 'myEvent'])->name('.myEvent');
+});
 
 
 

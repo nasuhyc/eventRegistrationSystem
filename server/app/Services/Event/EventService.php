@@ -36,7 +36,7 @@ class EventService{
         $organizerId=auth()->user()->id;
         $events=Event::whereHas('organizers', function($query) use($organizerId){
             $query->where('user_id', $organizerId);
-        })->with('organizers')->orderBy('created_at', 'desc')->get();
+        })->with('organizers','participants')->orderBy('created_at', 'desc')->get();
         return $events;
     }
 
